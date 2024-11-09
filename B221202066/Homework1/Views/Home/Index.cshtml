@@ -1,0 +1,155 @@
+@model List<Homework1.Models.Announcement>
+
+@section header {
+    <div id="header" class="header-container">
+        <h1>Announcements</h1>
+    </div>
+}
+
+<style>
+    .header-container {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 2rem;
+        color: #333;
+        position: relative;
+    }
+
+    /* Saat stili */
+    .current-time {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        font-size: 1.2rem;
+        color: #555;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .add-button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .add-button-container a {
+        text-decoration: none;
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .add-button-container a:hover {
+        background-color: #218838;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table thead {
+        background-color: #333;
+        color: white;
+    }
+
+    .table td,
+    .table th {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .details-btn {
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 3px;
+        text-decoration: none;
+    }
+
+    .details-btn:hover {
+        background-color: #0056b3;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+    }
+</style>
+
+<div class="current-time" id="currentTime">00:00:00</div>
+
+<div class="container">
+    <div class="add-button-container">
+        <a href="/Home/Add">Add Announcement</a>
+        <h2>Total Announcements: @Model.Count</h2>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Responsible Person</th>
+                <th>Created Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var announcement in Model)
+            {
+                <tr>
+                    <td>@announcement.Title</td>
+                    <td>@announcement.ResponsiblePerson</td>
+                    <td>@announcement.CreatedTime.ToString("dd MMM yyyy HH:mm")</td>
+                    <td>
+                        <a href="/Home/Details/@announcement.Id" class="details-btn">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<footer>
+    <footer>
+        <p>Taha Dervişoğlu B221202066 </p>
+        <br>
+        <p>Serdar Sina Bulut B221202011</p>
+        <br>
+        <p>Yiğit Şeker B221202063 </p>
+        <br>
+        <p>Türkbey Yozcu B221202061 </p>
+    </footer>
+</footer>
+
+<script>
+
+    function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+
+    setInterval(updateTime, 1000);
+    updateTime();
+</script>

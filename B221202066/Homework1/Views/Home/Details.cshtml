@@ -1,0 +1,103 @@
+@using Homework1.Models
+@model Announcement
+
+<style>
+    .current-time {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        font-size: 1.2rem;
+        color: #555;
+    }
+
+    .details-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h4 {
+        text-align: center;
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+        color: #555;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .back-link:hover {
+        background-color: #0056b3;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+    }
+
+    footer p {
+        color: white;
+    }
+</style>
+
+<h4>Announcement Details</h4>
+<div class="details-container">
+    <h5>ID: @Model.Id</h5>,
+    <h5>@Model.Title</h5>
+    <p>@Model.Text</p>
+    <p><strong>Responsible Person:</strong> @Model.ResponsiblePerson</p>
+    <p>@Model.CreatedTime.ToString("dd MMM yyyy HH:mm")</p>
+</div>
+
+<a href="/Home" class="back-link">Back to List</a>
+
+<footer>
+    <p>Taha Dervişoğlu B221202066</p>
+    <p>Serdar Sina Bulut B221202011</p>
+    <p>Yiğit Şeker B221202063</p>
+    <p>Türkbey Yozcu B221202061</p>
+</footer>
+
+<script>
+
+    function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+
+    setInterval(updateTime, 1000);
+    updateTime(); 
+</script>
